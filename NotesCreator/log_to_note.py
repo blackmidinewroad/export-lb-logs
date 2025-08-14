@@ -1,5 +1,6 @@
 import codecs
 import json
+import logging
 import os
 import re
 import sys
@@ -11,7 +12,7 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from filework import load_movies, log_error_to_file, save_movies
+from filework import load_movies, save_movies
 from lb_to_kp import transfer_rating_to_kp
 from slugify import slugify
 
@@ -254,6 +255,8 @@ def create_obsidian_note(movie, poster_path=None):
 
 # Main function that checks new entries in RSS feed
 def main():
+    logging.basicConfig(level=logging.WARNING, filename='export_lb.log', format='[%(asctime)s] %(levelname)s: %(message)s')
+
     processed_movies = load_movies(PROCESSED_LOGS_FILE)
     feed = feedparser.parse(RSS_FEED_URL)
 
@@ -279,6 +282,7 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except Exception:
-        log_error_to_file()
+    except Exception as e:
+        logger = logging.getLogger(__name__)
+        logger.error('%s', e, exc_info=True)
         sys.exit(1)
