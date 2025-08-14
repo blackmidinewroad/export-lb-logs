@@ -8,9 +8,9 @@ import feedparser
 from dotenv import load_dotenv
 from slugify import slugify
 
-from ..tmdb import api
-from .filework import load_movies, read_note, save_movies
-from .lb_to_kp import transfer_rating_to_kp
+from ExportLbLogs.NotesCreator.filework import load_movies, read_note, save_movies
+from ExportLbLogs.NotesCreator.lb_to_kp import transfer_rating_to_kp
+from ExportLbLogs.tmdb import api
 
 load_dotenv()
 
@@ -22,7 +22,7 @@ PROCESSED_LOGS_FILE = os.path.join(os.path.expanduser('~'), 'processed_movies.js
 ILLEGAL_CHARACTERS = '><:"\\/|?*'
 
 
-def get_movie_file_path(title: str, year: int, path: str) -> str:
+def get_movie_file_path(title: str, year: str, path: str) -> str:
     """Creates path to movie note"""
 
     for c in ILLEGAL_CHARACTERS:
@@ -72,7 +72,7 @@ def fetch_data_from_tmdb(tmdb_id: int, tmdb: api.TMDB) -> dict:
 
 
 def fetch_data_from_feed(entry: feedparser.util.FeedParserDict, tmdb: api.TMDB) -> dict:
-    movie_year = int(entry.get('letterboxd_filmyear', 0))
+    movie_year = entry.get('letterboxd_filmyear', '')
     movie_title = entry.get('letterboxd_filmtitle', 'No title')
     movie_id = f'{movie_title} - {movie_year}' if movie_year else f'{movie_title}'
     watched_date = datetime(*entry.published_parsed[:6]).strftime('%d.%m.%Y')
@@ -193,7 +193,7 @@ def main():
         if movie_data['id'] in processed_movies:
             update_obsidian_note(movie_data)
         else:
-            create_obsidian_note(movie_data, movie_data['poster_path'])
+            create_obsidian_note(movie_data)
             send_to_kp(movie_data)
 
         processed_movies.setdefault(movie_data['id'], []).append(f'{movie_data['watched_date']}')
