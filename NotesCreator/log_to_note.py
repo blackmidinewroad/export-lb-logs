@@ -12,7 +12,7 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from filework import load_movies, log_error_to_file, save_movies
-from NotesCreator.lb_to_kp import transfer_rating_to_kp
+from lb_to_kp import transfer_rating_to_kp
 from slugify import slugify
 
 load_dotenv()
@@ -22,7 +22,7 @@ OBSIDIAN_VAULT_PATH = os.getenv('OBSIDIAN_VAULT_PATH')
 RSS_FEED_URL = f'https://letterboxd.com/{LB_USERNAME}/rss/'
 POSTER_FOLDER_PATH = os.getenv('POSTER_FOLDER_PATH')
 NOT_RATED_FILE = os.getenv('NOT_RATED_FILE')
-PROCESSED_LOGS_FILE = os.getenv('PROCESSED_LOGS_FILE')
+PROCESSED_LOGS_FILE = os.path.join(os.path.expanduser('~'), 'processed_movies.json')
 ILLEGAL_CHARACTERS = '><:"\\/|?*'
 
 
