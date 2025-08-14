@@ -14,7 +14,7 @@ from urllib3.util import Retry
 
 from .exceptions import RetryableError
 
-logger = logging.getLogger('moviedb')
+logger = logging.getLogger(__name__)
 
 
 def retry_error_callback(retry_state: RetryCallState):

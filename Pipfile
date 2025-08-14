@@ -7,10 +7,15 @@ name = "pypi"
 requests = "*"
 feedparser = "*"
 bs4 = "*"
-slugify = "*"
 selenium = "*"
 webdriver-manager = "*"
 dotenv = "*"
+aiohttp = "*"
+aiolimiter = "*"
+ratelimit = "*"
+tenacity = "*"
+urllib3 = "*"
+python-slugify = "*"
 
 [dev-packages]
 

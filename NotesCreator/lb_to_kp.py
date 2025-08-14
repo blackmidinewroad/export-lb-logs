@@ -37,13 +37,11 @@ def is_element_present(driver: webdriver.Chrome, by: str, value: str, timeout: i
 
 
 def transfer_rating_to_kp(movie_data: dict) -> None:
-    '''Trying to search for the movie using english/original/russian title and release year.
+    """Trying to search for the movie using english/original title and release year.
     If found rates movie with rating from letterboxd log.
-    '''
+    """
 
-    titles = [movie_data.get('title', '')]
-    for other_title in movie_data['other_titles']:
-        titles.append(other_title)
+    titles = [movie_data.get('title', ''), movie_data.get('original_title', '')]
     year = movie_data.get('year', '')
     searches = [f'{title} {year}' for title in titles]
     rating = int(movie_data.get('rating', 0) * 2)
