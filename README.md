@@ -55,6 +55,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
   To set up automatic execution (e.g., via Windows Task Scheduler), you can build a standalone executable using PyInstaller:
 
   ```shell
+  cd project/root/folder
   pyinstaller --onefile --noconsole --paths "project/root/folder" notescreator/log_to_note.py
   ```
 
