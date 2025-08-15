@@ -19,10 +19,17 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
   cd ExportLbLogs
   ```
 
-2. **Install Dependencies**:
-  ```shell
-  pipenv install
-  ```
+2. **Install Dependencies**
+  - Using pipenv:
+
+      ```shell
+      pipenv install
+      ```
+   - Using pip:
+   
+      ```shell
+      pip install -r requirements.txt
+      ```
 
 3. **Set Up Environment Variables**
 
