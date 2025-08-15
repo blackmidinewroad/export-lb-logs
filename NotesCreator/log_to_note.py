@@ -3,14 +3,16 @@ import os
 import sys
 from datetime import datetime
 from math import floor
+from pathlib import Path
 
 import feedparser
 from dotenv import load_dotenv
 from slugify import slugify
 
-from ExportLbLogs.NotesCreator.filework import load_movies, read_note, save_movies
-from ExportLbLogs.NotesCreator.lb_to_kp import transfer_rating_to_kp
-from ExportLbLogs.tmdb import api
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from NotesCreator.filework import load_movies, read_note, save_movies
+from NotesCreator.lb_to_kp import transfer_rating_to_kp
+from tmdb import api
 
 load_dotenv()
 
