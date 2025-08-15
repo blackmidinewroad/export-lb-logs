@@ -46,7 +46,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 ## Usage
 - **Run the Script Directly**:
   ```shell
-  cd <parent_folder_to_ExportLbLogs>
+  cd parent/folder/of/ExportLbLogs
   python -m ExportLbLogs.NotesCreator.log_to_note
   ```
 
@@ -55,8 +55,9 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
   To set up automatic execution (e.g., via Windows Task Scheduler), you can build a standalone executable using PyInstaller:
 
   ```shell
-  pyinstaller --onefile --noconsole --paths "D:\Python\Projects" NotesCreator/log_to_note.py
+  pyinstaller --onefile --noconsole --paths "parent/folder/of/ExportLbLogs" NotesCreator/log_to_note.py
   ```
+  Replace `parent/folder/of/ExportLbLogs` with the actual path to the parent folder of the root project folder. For example, if the project is in `D:/Docs/ExportLbLogs`, then replace with `D:/Docs`.
 
   Once built, use Task Scheduler to run `.exe` automatically. You may need to set the `Start in` field in the Task Scheduler action for it to work properly. For example, if you specify `Program/script` as `D:\ExportLbLogs\dist\log_to_note.exe`, add 'Start in': `D:\ExportLbLogs`.
 
