@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import os
-from datetime import date, timedelta, datetime
+from datetime import date, datetime, timedelta
 from urllib.parse import urlencode, urljoin
 
 import aiohttp
@@ -12,7 +12,7 @@ from requests.adapters import HTTPAdapter
 from tenacity import RetryCallState, retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 from urllib3.util import Retry
 
-from .exceptions import RetryableError
+from tmdb.exceptions import RetryableError
 
 logger = logging.getLogger(__name__)
 
