@@ -208,5 +208,5 @@ if __name__ == '__main__':
         main()
     except Exception as e:
         logger = logging.getLogger(__name__)
-        logger.error('%s', e, exc_info=True)
+        logger.critical('%s', e, exc_info=True)
         sys.exit(1)
