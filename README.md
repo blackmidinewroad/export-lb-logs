@@ -15,8 +15,8 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 ## Installation
 1. **Clone the Repository**:
   ```shell
-  git clone https://github.com/blackmidinewroad/ExportLbLogs.git
-  cd ExportLbLogs
+  git clone https://github.com/blackmidinewroad/export-lb-logs.git
+  cd export-lb-logs
   ```
 
 2. **Install Dependencies**
@@ -54,7 +54,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 - **Run Directly**:
   ```shell
   cd project/root/folder
-  python notescreator/log_to_note.py
+  python notes_creator/log_to_note.py
   ```
 
 - **Automation**
@@ -63,7 +63,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 
   ```shell
   cd project/root/folder
-  pyinstaller --onefile --noconsole --paths "project/root/folder" notescreator/log_to_note.py
+  pyinstaller --onefile --noconsole --paths "project/root/folder" notes_creator/log_to_note.py
   ```
 
   Once built, use Task Scheduler to run `.exe` automatically. You may need to set the `Start in` field to `project/root/folder` in the Task Scheduler action for it to work properly.
