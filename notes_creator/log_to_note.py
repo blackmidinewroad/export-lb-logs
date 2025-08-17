@@ -16,11 +16,19 @@ from tmdb import api
 
 load_dotenv()
 
+
 LB_USERNAME = os.getenv('LB_USERNAME')
-OBSIDIAN_VAULT_PATH = os.getenv('OBSIDIAN_VAULT_PATH')
 RSS_FEED_URL = f'https://letterboxd.com/{LB_USERNAME}/rss/'
+OBSIDIAN_VAULT_PATH = os.getenv('OBSIDIAN_VAULT_PATH')
 NOT_RATED_FILE = os.getenv('NOT_RATED_FILE')
-PROCESSED_LOGS_FILE = os.path.join(os.path.expanduser('~'), 'processed_movies.json')
+
+USER_HOME_DIR = os.path.expanduser('~')
+EXPORTLB_DATA_DIR = Path(os.path.join(USER_HOME_DIR, 'ExportLbLogs'))
+if not EXPORTLB_DATA_DIR.exists():
+    EXPORTLB_DATA_DIR.mkdir(exist_ok=True)
+
+PROCESSED_LOGS_FILE = os.path.join(EXPORTLB_DATA_DIR, 'processed_movies.json')
+
 ILLEGAL_CHARACTERS = '><:"\\/|?*'
 
 

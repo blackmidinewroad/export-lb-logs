@@ -31,6 +31,7 @@ class Kinopoisk:
         options.add_argument('--headless=new')
         options.add_argument('--log-level=3')
         options.add_argument('--disable-gpu')
+        options.add_argument('--enable-unsafe-swiftshader')
         options.add_argument(f'--user-data-dir={os.getenv('CHROME_USER_DATA_DIR')}/Profile 1')
 
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)

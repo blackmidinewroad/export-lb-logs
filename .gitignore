@@ -5,5 +5,3 @@ dist/
 .env
 *.spec
 *.log
-
-processed_movies.json
