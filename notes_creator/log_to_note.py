@@ -11,7 +11,7 @@ from slugify import slugify
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from notes_creator.filework import load_movies, read_note, save_movies
-from notes_creator.lb_to_kp import transfer_rating_to_kp
+from notes_creator.lb_to_kp import Kinopoisk
 from tmdb import api
 
 load_dotenv()
@@ -43,11 +43,11 @@ def add_to_not_rated(id: str) -> None:
                 file.write(line)
 
 
-def send_to_kp(movie_data: dict) -> None:
+def send_to_kp(movie_data: dict, kp: Kinopoisk) -> None:
     """Rate movie on Kinnopoisk, if couldn't transfer rating to Kinnopoisk - add movie to not rated log file"""
 
     if movie_data['rating'] and movie_data['year']:
-        rated = transfer_rating_to_kp(movie_data)
+        rated = kp.transfer_rating_to_kp(movie_data)
         if not rated:
             add_to_not_rated(movie_data['id'])
 
@@ -183,22 +183,23 @@ def main():
     feed = feedparser.parse(RSS_FEED_URL)
     tmdb = api.TMDB()
 
-    for entry in feed.entries[4::-1]:
-        if entry.id.find('watch') == -1 and entry.id.find('review') == -1:
-            break
+    with Kinopoisk() as kp:
+        for entry in feed.entries[4::-1]:
+            if entry.id.find('watch') == -1 and entry.id.find('review') == -1:
+                break
 
-        movie_data = fetch_data_from_feed(entry, tmdb)
+            movie_data = fetch_data_from_feed(entry, tmdb)
 
-        if movie_data['watched_date'] in processed_movies.get(movie_data['id'], []):
-            continue
+            if movie_data['watched_date'] in processed_movies.get(movie_data['id'], []):
+                continue
 
-        if movie_data['id'] in processed_movies:
-            update_obsidian_note(movie_data)
-        else:
-            create_obsidian_note(movie_data)
-            send_to_kp(movie_data)
+            if movie_data['id'] in processed_movies:
+                update_obsidian_note(movie_data)
+            else:
+                create_obsidian_note(movie_data)
+                send_to_kp(movie_data, kp)
 
-        processed_movies.setdefault(movie_data['id'], []).append(f'{movie_data['watched_date']}')
+            processed_movies.setdefault(movie_data['id'], []).append(f'{movie_data['watched_date']}')
 
     save_movies(processed_movies, PROCESSED_LOGS_FILE)
 
