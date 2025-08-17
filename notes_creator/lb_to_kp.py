@@ -1,6 +1,3 @@
-import os
-
-from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.service import Service
@@ -9,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-load_dotenv()
+from config import Config
 
 
 class Kinopoisk:
@@ -32,7 +29,7 @@ class Kinopoisk:
         options.add_argument('--log-level=3')
         options.add_argument('--disable-gpu')
         options.add_argument('--enable-unsafe-swiftshader')
-        options.add_argument(f'--user-data-dir={os.getenv('CHROME_USER_DATA_DIR')}/Profile 1')
+        options.add_argument(f'--user-data-dir={Config.CHROME_USER_DATA_DIR}/Profile 1')
 
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 

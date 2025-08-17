@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import os
 from datetime import date, datetime, timedelta
 from urllib.parse import urlencode, urljoin
 
@@ -12,6 +11,7 @@ from requests.adapters import HTTPAdapter
 from tenacity import RetryCallState, retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 from urllib3.util import Retry
 
+from config import Config
 from tmdb.exceptions import RetryableError
 
 logger = logging.getLogger(__name__)
@@ -68,7 +68,7 @@ class TMDB(BaseTMDB):
         self.session.headers.update(
             {
                 'accept': 'application/json',
-                'Authorization': f'Bearer {os.getenv("TMDB_ACCESS_TOKEN")}',
+                'Authorization': f'Bearer {Config.TMDB_ACCESS_TOKEN}',
             }
         )
         self.session.mount('https://', HTTPAdapter(max_retries=self.retry))
@@ -309,7 +309,7 @@ class asyncTMDB(BaseTMDB):
     def __init__(self):
         self.headers = {
             'accept': 'application/json',
-            'Authorization': f'Bearer {os.getenv("TMDB_ACCESS_TOKEN")}',
+            'Authorization': f'Bearer {Config.TMDB_ACCESS_TOKEN}',
         }
         self.limiter = AsyncLimiter(self.calls, self.rate_limit)
         self.session = None

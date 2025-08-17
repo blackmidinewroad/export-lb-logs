@@ -6,28 +6,13 @@ from math import floor
 from pathlib import Path
 
 import feedparser
-from dotenv import load_dotenv
 from slugify import slugify
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
+from config import Config, ensure_directories
 from notes_creator.filework import load_movies, read_note, save_movies
 from notes_creator.lb_to_kp import Kinopoisk
 from tmdb import api
-
-load_dotenv()
-
-
-LB_USERNAME = os.getenv('LB_USERNAME')
-RSS_FEED_URL = f'https://letterboxd.com/{LB_USERNAME}/rss/'
-OBSIDIAN_VAULT_PATH = os.getenv('OBSIDIAN_VAULT_PATH')
-NOT_RATED_FILE = os.getenv('NOT_RATED_FILE')
-
-USER_HOME_DIR = os.path.expanduser('~')
-EXPORTLB_DATA_DIR = Path(os.path.join(USER_HOME_DIR, 'ExportLbLogs'))
-if not EXPORTLB_DATA_DIR.exists():
-    EXPORTLB_DATA_DIR.mkdir(exist_ok=True)
-
-PROCESSED_LOGS_FILE = os.path.join(EXPORTLB_DATA_DIR, 'processed_movies.json')
 
 ILLEGAL_CHARACTERS = '><:"\\/|?*'
 
@@ -43,10 +28,10 @@ def get_movie_file_path(title: str, year: str, path: str) -> str:
 
 
 def add_to_not_rated(id: str) -> None:
-    note = read_note(NOT_RATED_FILE)
+    note = read_note(Config.NOT_RATED_FILE)
     if note is not None:
         note.append(f'\n{id}')
-        with open(NOT_RATED_FILE, 'w', encoding='utf8') as file:
+        with open(Config.NOT_RATED_FILE, 'w', encoding='utf8') as file:
             for line in note:
                 file.write(line)
 
@@ -110,7 +95,7 @@ def fetch_data_from_feed(entry: feedparser.util.FeedParserDict, tmdb: api.TMDB) 
 def update_obsidian_note(movie: dict) -> None:
     """Update note if it's a rewatch"""
 
-    file_path = get_movie_file_path(movie['title'], movie['year'], OBSIDIAN_VAULT_PATH)
+    file_path = get_movie_file_path(movie['title'], movie['year'], Config.OBSIDIAN_VAULT_PATH)
     note = read_note(file_path)
     if not note:
         return
@@ -145,7 +130,7 @@ def create_obsidian_note(movie: dict) -> None:
     """Create an Obsidian note for a new movie"""
 
     star_rating = movie['star_rating'] if movie['star_rating'] else 'none'
-    file_path = get_movie_file_path(movie['title'], movie['year'], OBSIDIAN_VAULT_PATH)
+    file_path = get_movie_file_path(movie['title'], movie['year'], Config.OBSIDIAN_VAULT_PATH)
 
     with open(file_path, 'w', encoding='utf8') as file:
         if movie['poster_path']:
@@ -185,10 +170,12 @@ def create_obsidian_note(movie: dict) -> None:
 def main():
     """Main function that checks new entries in RSS feed, updates/creates notes and rates movies on Kinopoisk"""
 
-    logging.basicConfig(level=logging.WARNING, filename='export_lb.log', format='[%(asctime)s] %(levelname)s: %(message)s')
+    ensure_directories()
 
-    processed_movies = load_movies(PROCESSED_LOGS_FILE)
-    feed = feedparser.parse(RSS_FEED_URL)
+    logging.basicConfig(level=logging.WARNING, filename=Config.ERROR_LOG_FILE, format='[%(asctime)s] %(levelname)s: %(message)s')
+
+    processed_movies = load_movies(Config.PROCESSED_LOGS_FILE)
+    feed = feedparser.parse(Config.RSS_FEED_URL)
     tmdb = api.TMDB()
 
     with Kinopoisk() as kp:
@@ -209,7 +196,7 @@ def main():
 
             processed_movies.setdefault(movie_data['id'], []).append(f'{movie_data['watched_date']}')
 
-    save_movies(processed_movies, PROCESSED_LOGS_FILE)
+    save_movies(processed_movies, Config.PROCESSED_LOGS_FILE)
 
 
 if __name__ == '__main__':
