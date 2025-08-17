@@ -38,13 +38,13 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
   LB_USERNAME='your-letterboxd-username'
   OBSIDIAN_VAULT_PATH='path/to/notes/folder'
   NOT_RATED_FILE='path/to/not/rated/log.md'
-  CHROME_USER_DATA_DIR='path/to/user-data/folder'
+  CHROME_PROFILE_DIR='path/to/chrome/profile/folder'
   TMDB_ACCESS_TOKEN='your-tmdb-access-token'
   ```
 
   - Replace `path/to/notes/folder` with the actual path to the folder where notes will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies`).
   - Replace `path/to/not/rated/log.md` with the actual path to the file where not rated movies will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies/NotRated/log.md`).
-  - Replace `path/to/user-data/folder` with the actual path to the Chrome User Data folder (e.g., `C:/Users/JohnDoe/AppData/Local/Google/Chrome/User Data`).
+  - Replace `path/to/chrome/profile/folder` with the actual path to the Chrome Profile folder (e.g., `C:/Users/JohnDoe/AppData/Local/Google/Chrome/User Data/Profile 1`).
   - Replace `your-tmdb-access-token` with your actual access token. If you don't have it yet, sign up at [TMDB](https://www.themoviedb.org/), then go to [API settings](https://www.themoviedb.org/settings/api) to register for an API access. After API registration you will have `API Read Access Token` in your profile settings.
 
 
