@@ -22,6 +22,6 @@ class Config:
 
 
 def ensure_directories() -> None:
-    """Ensure necessary directories exist"""
+    """Ensure necessary directories exist."""
 
     Config.EXPORTLB_DATA_DIR.mkdir(parents=True, exist_ok=True)

@@ -18,12 +18,14 @@ ILLEGAL_CHARACTERS = '><:"\\/|?*'
 
 
 def get_movie_file_path(title: str, year: str, path: str) -> str:
-    """Creates path to movie note"""
+    """Creates path to movie note."""
 
     for c in ILLEGAL_CHARACTERS:
         title = title.replace(c, '')
+        
     filename = f'{title} - {year}.md' if year else f'{title}.md'
     file_path = os.path.join(path, filename)
+
     return file_path
 
 
@@ -37,7 +39,7 @@ def add_to_not_rated(id: str) -> None:
 
 
 def send_to_kp(movie_data: dict, kp: Kinopoisk) -> None:
-    """Rate movie on Kinnopoisk, if couldn't transfer rating to Kinnopoisk - add movie to not rated log file"""
+    """Rate movie on Kinnopoisk, if couldn't transfer rating to Kinnopoisk - add movie to not rated log file."""
 
     if movie_data['rating'] and movie_data['year']:
         rated = kp.transfer_rating_to_kp(movie_data)
@@ -46,7 +48,7 @@ def send_to_kp(movie_data: dict, kp: Kinopoisk) -> None:
 
 
 def fetch_data_from_tmdb(tmdb_id: int, tmdb: api.TMDB) -> dict:
-    """Fetch more data using TMDB API"""
+    """Fetch more data using TMDB API."""
 
     tmdb_data = tmdb.fetch_movie_by_id(tmdb_id, append_to_response=['credits'])
 
@@ -93,7 +95,7 @@ def fetch_data_from_feed(entry: feedparser.util.FeedParserDict, tmdb: api.TMDB) 
 
 
 def update_obsidian_note(movie: dict) -> None:
-    """Update note if it's a rewatch"""
+    """Update note if it's a rewatch."""
 
     file_path = get_movie_file_path(movie['title'], movie['year'], Config.OBSIDIAN_VAULT_PATH)
     note = read_note(file_path)
@@ -127,7 +129,7 @@ def update_obsidian_note(movie: dict) -> None:
 
 
 def create_obsidian_note(movie: dict) -> None:
-    """Create an Obsidian note for a new movie"""
+    """Create an Obsidian note for a new movie."""
 
     star_rating = movie['star_rating'] if movie['star_rating'] else 'none'
     file_path = get_movie_file_path(movie['title'], movie['year'], Config.OBSIDIAN_VAULT_PATH)
@@ -168,7 +170,7 @@ def create_obsidian_note(movie: dict) -> None:
 
 
 def main():
-    """Main function that checks new entries in RSS feed, updates/creates notes and rates movies on Kinopoisk"""
+    """Main function that checks new entries in RSS feed, updates/creates notes and rates movies on Kinopoisk."""
 
     ensure_directories()
 
