@@ -9,7 +9,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
   - Movie details (poster, letterboxd URL, director etc.)
   - Your rating, watch date, and space to add personal thoughts
   - Tags based on rating, release year, genres, etc.
-- Optional: Uses **Selenium** to automatically rate the movie on **Kinopoisk**. Requires you to have **ChromeDriver** and to pre-log into Kinopoisk in your browser profile.
+- Optional: Uses **Selenium** to automatically rate the movie on **Kinopoisk**. You are required to have a Chrome browser profile in which you are logged into Kinopoisk.
 
 
 ## Installation
@@ -38,14 +38,12 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
   LB_USERNAME='your-letterboxd-username'
   OBSIDIAN_VAULT_PATH='path/to/notes/folder'
   NOT_RATED_FILE='path/to/not/rated/log.md'
-  CHROME_DRIVER_FILE='path/to/chromedriver.exe'
   CHROME_USER_DATA_DIR='path/to/user-data/folder'
   TMDB_ACCESS_TOKEN='your-tmdb-access-token'
   ```
 
   - Replace `path/to/notes/folder` with the actual path to the folder where notes will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies`).
   - Replace `path/to/not/rated/log.md` with the actual path to the file where not rated movies will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies/NotRated/log.md`).
-  - Replace `path/to/chromedriver.exe` with the actual path to the ChromeDriver file (e.g., `C:/ChromeDriver/chromedriver.exe`).
   - Replace `path/to/user-data/folder` with the actual path to the Chrome User Data folder (e.g., `C:/Users/JohnDoe/AppData/Local/Google/Chrome/User Data`).
   - Replace `your-tmdb-access-token` with your actual access token. If you don't have it yet, sign up at [TMDB](https://www.themoviedb.org/), then go to [API settings](https://www.themoviedb.org/settings/api) to register for an API access. After API registration you will have `API Read Access Token` in your profile settings.
 
