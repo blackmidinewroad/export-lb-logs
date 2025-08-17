@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 requests = "*"
 feedparser = "*"
-bs4 = "*"
 selenium = "*"
 webdriver-manager = "*"
 dotenv = "*"
