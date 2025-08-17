@@ -16,7 +16,7 @@ class Config:
     PROCESSED_LOGS_FILE = EXPORTLB_DATA_DIR / 'processed_movies.json'
     ERROR_LOG_FILE = EXPORTLB_DATA_DIR / 'export_lb.log'
 
-    CHROME_USER_DATA_DIR = os.getenv('CHROME_USER_DATA_DIR')
+    CHROME_PROFILE_DIR = os.getenv('CHROME_PROFILE_DIR')
 
     TMDB_ACCESS_TOKEN = os.getenv('TMDB_ACCESS_TOKEN')
 
