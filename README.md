@@ -14,38 +14,39 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 
 ## Installation
 1. **Clone the Repository**:
-  ```shell
-  git clone https://github.com/blackmidinewroad/export-lb-logs.git
-  cd export-lb-logs
-  ```
+
+    ```shell
+    git clone https://github.com/blackmidinewroad/export-lb-logs.git
+    cd export-lb-logs
+    ```
 
 2. **Install Dependencies**
-  - Using pipenv:
+    - Using pipenv:
 
-      ```shell
-      pipenv install
-      ```
-   - Using pip:
-   
-      ```shell
-      pip install -r requirements.txt
-      ```
+        ```shell
+        pipenv install
+        ```
+    - Using pip:
+    
+        ```shell
+        pip install -r requirements.txt
+        ```
 
 3. **Set Up Environment Variables**
 
-  Create a `.env` file in the project root with the following:
-  ```env
-  LB_USERNAME='your-letterboxd-username'
-  OBSIDIAN_VAULT_PATH='path/to/notes/folder'
-  NOT_RATED_FILE='path/to/not/rated/log.md'
-  CHROME_PROFILE_DIR='path/to/chrome/profile/folder'
-  TMDB_ACCESS_TOKEN='your-tmdb-access-token'
-  ```
+    Create a `.env` file in the project root with the following:
+    ```env
+    LB_USERNAME='your-letterboxd-username'
+    OBSIDIAN_VAULT_PATH='path/to/notes/folder'
+    NOT_RATED_FILE='path/to/not/rated/log.md'
+    CHROME_PROFILE_DIR='path/to/chrome/profile/folder'
+    TMDB_ACCESS_TOKEN='your-tmdb-access-token'
+    ```
 
-  - Replace `path/to/notes/folder` with the actual path to the folder where notes will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies`).
-  - Replace `path/to/not/rated/log.md` with the actual path to the file where not rated movies will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies/NotRated/log.md`).
-  - Replace `path/to/chrome/profile/folder` with the actual path to the Chrome Profile folder (e.g., `C:/Users/JohnDoe/AppData/Local/Google/Chrome/User Data/Profile 1`).
-  - Replace `your-tmdb-access-token` with your actual access token. If you don't have it yet, sign up at [TMDB](https://www.themoviedb.org/), then go to [API settings](https://www.themoviedb.org/settings/api) to register for an API access. After API registration you will have `API Read Access Token` in your profile settings.
+    - Replace `path/to/notes/folder` with the actual path to the folder where notes will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies`).
+    - Replace `path/to/not/rated/log.md` with the actual path to the file where not rated movies will be stored (e.g., `D:/ObsidianVaults/MyVault/Movies/NotRated/log.md`).
+    - Replace `path/to/chrome/profile/folder` with the actual path to the Chrome Profile folder (e.g., `C:/Users/JohnDoe/AppData/Local/Google/Chrome/User Data/Profile 1`).
+    - Replace `your-tmdb-access-token` with your actual access token. If you don't have it yet, sign up at [TMDB](https://www.themoviedb.org/), then go to [API settings](https://www.themoviedb.org/settings/api) to register for an API access. After API registration you will have `API Read Access Token` in your profile settings.
 
 
 ## Usage
