@@ -3,12 +3,10 @@ import os
 import sys
 from datetime import datetime
 from math import floor
-from pathlib import Path
 
 import feedparser
 from slugify import slugify
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
 from config import Config, ensure_directories
 from notes_creator.filework import load_movies, read_note, save_movies
 from notes_creator.lb_to_kp import Kinopoisk
@@ -22,7 +20,7 @@ def get_movie_file_path(title: str, year: str, path: str) -> str:
 
     for c in ILLEGAL_CHARACTERS:
         title = title.replace(c, '')
-        
+
     filename = f'{title} - {year}.md' if year else f'{title}.md'
     file_path = os.path.join(path, filename)
 

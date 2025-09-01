@@ -12,7 +12,8 @@ from tenacity import RetryCallState, retry, retry_if_exception_type, stop_after_
 from urllib3.util import Retry
 
 from config import Config
-from tmdb.exceptions import RetryableError
+
+from .exceptions import RetryableError
 
 logger = logging.getLogger(__name__)
 
