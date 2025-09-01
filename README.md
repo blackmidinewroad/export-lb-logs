@@ -53,7 +53,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 - **Run Directly**:
   ```shell
   cd project/root/folder
-  python notes_creator/log_to_note.py
+  python -m notes_creator.log_to_note
   ```
 
 - **Automation**
@@ -62,7 +62,7 @@ This is a Python tool that retrieves your latest Letterboxd diary entries via RS
 
   ```shell
   cd project/root/folder
-  pyinstaller --onefile --noconsole --paths "project/root/folder" notes_creator/log_to_note.py
+  pyinstaller --onefile --noconsole notes_creator/log_to_note.py
   ```
 
   Once built, use Task Scheduler to run `.exe` automatically. You may need to set the `Start in` field to `project/root/folder` in the Task Scheduler action for it to work properly.
